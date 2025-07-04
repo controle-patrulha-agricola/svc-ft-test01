@@ -1,0 +1,29 @@
+name: Function Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  function-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Start service in background
+        run: |
+          nohup go run main.go &
+          sleep 2 # Aguarda o serviço subir
+
+      - name: Run Function Tests
+        run: go test -v function_test.go
