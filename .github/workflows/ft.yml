@@ -1,4 +1,4 @@
-name: Function Tests
+name: FT - svc-ft-test01
 
 on:
   push:
