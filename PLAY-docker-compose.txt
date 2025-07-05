@@ -1,0 +1,16 @@
+1) DOCKER
+docker run --name meu-nginx001 -p 8888:80 nginx:latest      // COM nome de container
+docker run -p 8888:80 nginx:latest                          // SEM nome de container 
+                                                            // obs1: o docker cria um nome unico: hopeful_matsumoto, flamboyant_burnell
+                                                            // obs2: rodando "com nome" pode dar colisao com um que ja morreu.
+docker ps -a                                                // lista o cemiterio de containers !
+docker rm meu-nginx001                                      // remove o morto ! 
+
+terminal 2: 
+    watch -n 1  "netstat -tupan | grep 8888"
+terminal 3: 
+    curl http://localhost:8888/
+    curl http://localhost:8888/echo/teste
+
+
+2) DOCKER-COMPOSE
