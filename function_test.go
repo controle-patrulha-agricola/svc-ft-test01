@@ -10,7 +10,7 @@ import (
 )
 
 func TestEchoEndpoint(t *testing.T) {
-	resp, err := http.Get("http://svc001:9999/echo/hello")
+	resp, err := http.Get("http://svc002:9999/echo/hello")
 	assert.NoError(t, err)
 	defer resp.Body.Close()
 

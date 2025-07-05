@@ -1,17 +1,17 @@
 version: '3.8'
 
 services:
-  svc001:
+  svc002:
     build:
       context: .
     ports:
       - "9999:9999"
 
-  tester001:
+  tester002:
     image: golang:1.24.4
     working_dir: /tests
     volumes:
       - .:/tests
     depends_on:
-      - svc001
+      - svc002
     entrypoint: ["sh", "-c", "sleep 2 && go test -v function_test.go"]

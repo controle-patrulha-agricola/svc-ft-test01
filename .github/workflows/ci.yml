@@ -20,4 +20,4 @@ jobs:
 
       - name: Compose up with tests
         run: |
-          docker compose up --build --exit-code-from tester001
+          docker compose up --build --exit-code-from tester002
