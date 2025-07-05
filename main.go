@@ -10,14 +10,15 @@ import (
 
 func main() {
 	r := gin.Default()
-	fmt.Println("main.go svc-FT-test1")
+	fmt.Println("================= main.go svc-FT-test1")
 
 	r.GET("/echo/:text", func(c *gin.Context) {
-		input := c.Param("text")
-		result := input + "cpa"
 
+		input := c.Param("text")
+		result := "\n Teste do cpa: vc digitou " + input + "\n"
 		c.String(http.StatusOK, result)
+		fmt.Printf("================= main.go handler /echo: %s\n", input)
 	})
 
-	r.Run(":8888") // Porta 8888
+	r.Run(":9999") // Porta 9999
 }

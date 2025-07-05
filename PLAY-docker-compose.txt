@@ -1,4 +1,4 @@
-1) DOCKER
+1) DOCKER com imagem publica
 docker run --name meu-nginx001 -p 8888:80 nginx:latest      // COM nome de container
 docker run -p 8888:80 nginx:latest                          // SEM nome de container 
                                                             // obs1: o docker cria um nome unico: hopeful_matsumoto, flamboyant_burnell
@@ -12,5 +12,45 @@ terminal 3:
     curl http://localhost:8888/
     curl http://localhost:8888/echo/teste
 
+2) golang main.go com gin webserver escutando 9999 
+    go run main.go
+    watch -n 1  "netstat -tupan | grep 9999"
+    curl http://localhost:9999/echo/xxx
+
+
+3) Dockerfile e build do main.go acima
+docker build .                                              // build SEM nome de imagem (no diretorio do Dockerfile)
+docker build -t meu-app-001 .                               // build COM nome de imagem
+    docker images
+    REPOSITORY    TAG       IMAGE ID       CREATED          SIZE
+    meu-app-001   latest    3f7321a87099   12 seconds ago   1.09GB
+
+docker run <image>                                          // executa a imagem
+docker run --name run001 -p 9999:9999 meu-app-001           // precisa do "-p" para exportar porta 9999
+    docker ps
+    CONTAINER ID   IMAGE         COMMAND            CREATED         STATUS         PORTS     NAMES
+    a8e18b7fb1f8   meu-app-001   "go run main.go"   9 seconds ago   Up 8 seconds             run001
+    CONTAINER ID   IMAGE         COMMAND            CREATED         STATUS         PORTS                     NAMES
+    351a4d104e08   meu-app-001   "go run main.go"   2 minutes ago   Up 2 minutes   0.0.0.0:9999->9999/tcp   run001
+
+docker logs run001 -f
+
+docker stop run001
+docker rm run001
+docker rmi <image-ID>
+docker rmi meu-app-001 
 
 2) DOCKER-COMPOSE
+
+
+10) DICAS: 
+Abre varias janelas no terminator: 
+    a) input: docker run ou go run
+    b) docker logs run001 -f
+    c) watch docker ps
+    d) watch docker ps -a
+    e) watch docker images
+    f) watch -n 1  "netstat -tupan | grep 9999"
+    g) input: curl http://localhost:9999/echo/xxx
+
+
