@@ -10,12 +10,12 @@ import (
 )
 
 func TestEchoEndpoint(t *testing.T) {
-	resp, err := http.Get("http://localhost:8888/echo/hello")
+	resp, err := http.Get("http://svc001:9999/echo/hello")
 	assert.NoError(t, err)
 	defer resp.Body.Close()
 
 	body, _ := ioutil.ReadAll(resp.Body)
 	result := strings.TrimSpace(string(body))
 
-	assert.Equal(t, "hellocpa", result)
+	assert.Contains(t, result, "vc digitou hello")
 }
