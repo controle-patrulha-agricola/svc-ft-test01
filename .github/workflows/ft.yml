@@ -15,15 +15,5 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.21'
-
-      - name: Start service in background
-        run: |
-          nohup go run main.go &
-          sleep 2 # Aguarda o serviço subir
-
-      - name: Run Function Tests
-        run: go test -v function_test.go
+      - name: Docker Compose Build and Run
+        run: docker compose up --build --exit-code-from tester
